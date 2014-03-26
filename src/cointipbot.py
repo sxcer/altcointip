@@ -103,7 +103,9 @@ class CointipBot(object):
         """
         lg.debug('CointipBot::connect_db(): connecting to database...')
 
-        dsn = "mysql+mysqldb://%s:%s@%s:%s/%s?charset=utf8" % (self.conf.db.auth.user, self.conf.db.auth.password, self.conf.db.auth.host, self.conf.db.auth.port, self.conf.db.auth.dbname)
+        #dsn = "mysql+mysqldb://%s:%s@%s:%s/%s?charset=utf8" % (self.conf.db.auth.user, self.conf.db.auth.password, self.conf.db.auth.host, self.conf.db.auth.port, self.conf.db.auth.dbname)
+        # to socket
+        dsn = "mysql+mysqldb://%s:%s@%s/%s?charset=utf8" % (self.conf.db.auth.user, self.conf.db.auth.password, self.conf.db.auth.host, self.conf.db.auth.dbname)
         dbobj = ctb_db.CointipBotDatabase(dsn)
 
         try:
@@ -389,10 +391,10 @@ class CointipBot(object):
         """
 
         # Return if rate has been checked in the past hour
-        seconds = int(1 * 3600)
-        if hasattr(self.conf.exchanges, 'last_refresh') and self.conf.exchanges.last_refresh + seconds > int(time.mktime(time.gmtime())):
-            lg.debug("< CointipBot::refresh_ev(): DONE (skipping)")
-            return
+        #seconds = int(1 * 3600)
+        #if hasattr(self.conf.exchanges, 'last_refresh') and self.conf.exchanges.last_refresh + seconds > int(time.mktime(time.gmtime())):
+        #    lg.debug("< CointipBot::refresh_ev(): DONE (skipping)")
+        #    return
 
         # For each enabled coin...
         for c in vars(self.conf.coins):

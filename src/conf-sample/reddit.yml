@@ -5,7 +5,8 @@ auth:
 scan:
     batch_limit: 1000
     my_subreddits: false
-#    these_subreddits: ["all"]
+    these_subreddits: ["all"]
+#    these_subreddits: ['sexcoin', 'girlsgonesexcoin', 'GirlsGoneBitcoin', 'ALTcointip']
 
 help:
     enabled: true
@@ -25,18 +26,18 @@ messages:
 redeem:
     unit: 'usd'
     multicoin: true
-    min_karma: 150
-    base: 0.1
+    min_karma: 1
+    base: 0.01
     multiplier:
-        link: 0.00005
-        comment: 0.000005
-    maximum: 0.5
+        link: 0.02
+        comment: 0.02
+    maximum: 0.10
     account: 'YOUR_ACCOUNT_NAME'
 
 banned_users:
     method: list
-    list: ['mybotuser', 'bitcointip', 'altcointip']
-    subreddit: 'mysubreddit'
+    list: ['sxctip', 'bitcointip', 'altcointip']
+    subreddit: 'sxctip'
 
 stats:
     enabled: false

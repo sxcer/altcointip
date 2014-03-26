@@ -183,19 +183,15 @@ class CtbAction(object):
                 self.fiat = 'usd'
             if not self.fiatval:
                 # Determine fiat value
-                if self.ctb.coin_value(self.ctb.conf.coins[self.coin].unit, self.fiat) <= 0.0:
-                    raise CtbActionExc("CtbAction::__init__(): coin_value returned 0")
                 self.fiatval = self.coinval * self.ctb.coin_value(self.ctb.conf.coins[self.coin].unit, self.fiat)
             elif not self.coinval:
                 # Determine coin value
-                if self.ctb.coin_value(self.ctb.conf.coins[self.coin].unit, self.fiat) <= 0.0:
-                    raise CtbActionExc("CtbAction::__init__(): coin_value returned 0")
                 self.coinval = self.fiatval / self.ctb.coin_value(self.ctb.conf.coins[self.coin].unit, self.fiat)
 
-        # Final check to make sure coin value is determined
+        # Check that values are positive
         if self.type in ['givetip', 'withdraw']:
-            if not self.coinval or not type(self.coinval) in [float, int]:
-                raise CtbActionExc("CtbAction::__init__(): couldn't determine coin value, giving up. CtbAction: <%s>", self)
+            if not self.coinval or not self.coinval > 0.0:
+                raise CtbActionExc("CtbAction::__init__(): couldn't determine coin value, giving up")
 
         lg.debug("< CtbAction::__init__(atype=%s, from_user=%s) DONE", self.type, self.u_from.name)
 
@@ -355,9 +351,6 @@ class CtbAction(object):
         msg = self.ctb.jenv.get_template('history.tpl').render(history=history, keys=mysqlexec.keys(), limit=limit, a=self, ctb=self.ctb)
         lg.debug("CtbAction::history(): %s", msg)
         ctb_misc.praw_call(self.msg.reply, msg)
-
-        # Save as completed
-        self.save('completed')
 
         lg.debug("< CtbAction::history() DONE")
         return True

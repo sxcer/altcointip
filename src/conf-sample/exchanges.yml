@@ -9,8 +9,8 @@ blockchaininfo:
     uppercase: true
 
 vircurex:
-    enabled: true
-    domain: 'api.vircurex.com'
+    enabled: false
+    domain: 'vircurex.com'
     https: true
     urlpaths: ['/api/get_highest_bid.json?base={THING_FROM}&alt={THING_TO}', '/api/get_lowest_ask.json?base={THING_FROM}&alt={THING_TO}']
     jsonpaths: ['value']
@@ -49,7 +49,7 @@ mtgox:
     uppercase: true
 
 campbx:
-    enabled: true
+    enabled: false
     domain: 'campbx.com'
     https: true
     urlpaths: ['/api/xticker.php']
@@ -59,17 +59,17 @@ campbx:
     uppercase: false
 
 cryptsy:
-    enabled: true
+    enabled: false
     domain: 'pubapi.cryptsy.com'
     https: false
     urlpaths: ['/api.php?method=marketdatav2']
     jsonpaths: ['return.markets.{THING_FROM}/{THING_TO}.lasttradeprice']
-    coinlist: ['btc','alf','amc','anc','arg','bqc','bte','btg','buk','cap','cgb','clr','cmc','crc','csc','dgc','dmd','elc','emd','frc','frk','fst','ftc','gdc','glc','glx','hbn','ixc','kgc','lk7','lky','ltc','mec','mnc','nbl','nec','nmc','nrb','nvc,',phs','ppc','pts','pxc','pyc','qrk','sbc','spt','src','tag','tek','trc','wdc','xjo','xpm','yac','zet']
-    fiatlist: []
+    coinlist: ['alf','amc','anc','arg','bqc','bte','btg','buk','cap','cgb','clr','cmc','crc','csc','dgc','dmd','elc','emd','frc','frk','fst','ftc','gdc','glc','glx','hbn','ixc','kgc','lk7','lky','ltc','mec','mnc','nbl','nec','nmc','nrb','nvc,','phs','ppc','pts','pxc','pyc','qrk','sbc','spt','src','sxc','tag','tek','trc','wdc','xjo','xpm','yac','zet']
+    fiatlist: ['usd']
     uppercase: true
 
 bter:
-    enabled: true
+    enabled: false
     domain: 'bter.com'
     https: true
     urlpaths: ['/api/1/ticker/{THING_FROM}_{THING_TO}']
@@ -79,7 +79,7 @@ bter:
     uppercase: false
 
 cryptotrade:
-    enabled: true
+    enabled: false
     domain: 'crypto-trade.com'
     https: true
     urlpaths: ['/api/1/ticker/{THING_FROM}_{THING_TO}']
@@ -89,7 +89,7 @@ cryptotrade:
     uppercase: false
 
 coinse:
-    enabled: true
+    enabled: false
     domain: 'www.coins-e.com'
     https: true
     urlpaths: ['/api/v2/markets/data/']
@@ -104,6 +104,6 @@ cryptocoincharts:
     https: false
     urlpaths: ['/v2/api/tradingPair/{THING_FROM}_{THING_TO}']
     jsonpaths: ['price']
-    coinlist: ['btc','ltc','ppc','nmc','xmp','mec','bqc','dgc','ifc','ixc','mnc','qrk','sbc','zet','doge','nxt','msc','ftc','nvc','dvc','frc','trc']
+    coinlist: ['btc','ltc','ppc','nmc','xmp','mec','bqc','dgc','ifc','ixc','mnc','qrk','sbc','zet','doge','nxt','msc','ftc','nvc','dvc','frc','trc','sxc']
     fiatlist: ['usd','eur']
     uppercase: false

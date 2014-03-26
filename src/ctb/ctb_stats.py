@@ -123,28 +123,11 @@ def update_user_stats(ctb=None, username=None):
     for c in coins_q:
         coins.append(c['coin'])
 
-    # List of fiat
-    fiat_q = ctb.db.execute(ctb.conf.db.sql.userstats.fiat)
-    fiat = []
-    for f in fiat_q:
-        fiat.append(f['fiat'])
-
     # Start building stats page
     user_stats = "### Tipping Summary for /u/%s\n\n" % username
     page = ctb.conf.reddit.stats.page + '_' + username
 
     # Total Tipped
-    user_stats += "#### Total Tipped (Fiat)\n\n"
-    user_stats += "fiat|total\n:---|---:\n"
-    total_tipped = []
-    for f in fiat:
-        mysqlexec = ctb.db.execute(ctb.conf.db.sql.userstats.total_tipped_fiat, (username, f))
-        total_tipped_fiat = mysqlexec.fetchone()
-        if total_tipped_fiat['total_fiat'] != None:
-            user_stats += "**%s**|%s %.2f\n" % (f, ctb.conf.fiat[f].symbol, total_tipped_fiat['total_fiat'])
-            total_tipped.append("%s%.2f" % (ctb.conf.fiat[f].symbol, total_tipped_fiat['total_fiat']))
-    user_stats += "\n"
-
     user_stats += "#### Total Tipped (Coins)\n\n"
     user_stats += "coin|total\n:---|---:\n"
     for c in coins:
@@ -155,17 +138,6 @@ def update_user_stats(ctb=None, username=None):
     user_stats += "\n"
 
     # Total received
-    user_stats += "#### Total Received (Fiat)\n\n"
-    user_stats += "fiat|total\n:---|---:\n"
-    total_received = []
-    for f in fiat:
-        mysqlexec = ctb.db.execute(ctb.conf.db.sql.userstats.total_received_fiat, (username, f))
-        total_received_fiat = mysqlexec.fetchone()
-        if total_received_fiat['total_fiat'] != None:
-            user_stats += "**%s**|%s %.2f\n" % (f, ctb.conf.fiat[f].symbol, total_received_fiat['total_fiat'])
-            total_received.append("%s%.2f" % (ctb.conf.fiat[f].symbol, total_received_fiat['total_fiat']))
-    user_stats += "\n"
-
     user_stats += "#### Total Received (Coins)\n\n"
     user_stats += "coin|total\n:---|---:\n"
     for c in coins:

@@ -32,11 +32,6 @@
 {%   set coin_symbol = ctb.conf.coins[a.coin].symbol %}
 {%   set coin_amount_fmt = " __^%s%s%.6g ^%s%ss__" % (amount_prefix_short, coin_symbol, coin_amount, amount_prefix_long, coin_name) %}
 {% endif %}
-{% if a.fiatval: %}
-{%   set fiat_amount = a.fiatval %}
-{%   set fiat_symbol = ctb.conf.fiat[a.fiat].symbol %}
-{%   set fiat_amount_fmt = "&nbsp;^__(%s%.4f)__" % (fiat_symbol, fiat_amount) %}
-{% endif %}
 {% if ctb.conf.reddit.stats.enabled: %}
 {%   set stats_user_from_fmt = " ^^[[stats]](%s_%s)" % (ctb.conf.reddit.stats.url, a.u_from.name) %}
 {%   set stats_link_fmt = " ^[[global_stats]](%s)" % ctb.conf.reddit.stats.url %}
@@ -56,12 +51,8 @@
 {%   else %}
 {%     set txt = txt | replace("{USER_TO}", user_to_fmt) %}
 {%   endif %}
-{%   if fiat_amount_fmt %}
-{%     set txt = txt | replace("{AMOUNT}", coin_amount_fmt + fiat_amount_fmt) %}
-{%   else %}
-{%     set txt = txt | replace("{AMOUNT}", coin_amount_fmt) %}
-{%   endif %}
+{%   set txt = txt | replace("{AMOUNT}", coin_amount_fmt) %}
 {{   txt }}
 {% else %}
-{{   title_fmt }}{{ user_from_fmt }}{{ stats_user_from_fmt }}{{ arrow_fmt }}{{ user_to_fmt }}{{ stats_user_to_fmt }}{{ coin_amount_fmt }}{{ fiat_amount_fmt }}{{ help_link_fmt }}{{ stats_link_fmt }}
+{{   title_fmt }}{{ user_from_fmt }}{{ stats_user_from_fmt }}{{ arrow_fmt }}{{ user_to_fmt }}{{ stats_user_to_fmt }}{{ coin_amount_fmt }}{{ help_link_fmt }}{{ stats_link_fmt }}
 {% endif %}
